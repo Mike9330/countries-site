@@ -1,6 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { CountriesService } from '../countries.service';
+import { Output, EventEmitter } from '@angular/core';
 
 
 @Component({
@@ -13,6 +14,8 @@ export class CountriesDropdownComponent implements OnDestroy {
   listOfCountries: any[] = [];
 value: any;
 
+@Output() emitCountries = new EventEmitter<any>();
+
  constructor(private countryService: CountriesService) {}
 
  countries: any[] = [];
@@ -24,8 +27,12 @@ value: any;
  getCountries() {
   this.countryService.getCountries().subscribe(data => {
     this.countries = data;
-    console.log(this.countries);
+    this.countries = this.countries.sort((a, b) => a.name.common.localeCompare(b.name.common));
    });
+ }
+
+ countryChosen(country: any){
+  this.countryService.changeCountry(country);
  }
 
  ngOnDestroy(): void {

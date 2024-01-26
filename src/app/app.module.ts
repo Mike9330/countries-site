@@ -7,19 +7,22 @@ import { CountriesDropdownComponent } from './countries-dropdown/countries-dropd
 import { MatSelectModule} from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-
+import { BackgroundComponent } from './background/background.component';
+import { CardGridComponent } from './card-grid/card-grid.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CountriesDropdownComponent
+    CountriesDropdownComponent,
+    BackgroundComponent,
+    CardGridComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MatSelectModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule  
   ],
   providers: [],
   bootstrap: [AppComponent]
