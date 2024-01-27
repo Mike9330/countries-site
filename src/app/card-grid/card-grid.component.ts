@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CountriesService } from '../countries.service';
+import { DomSanitizer } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-card-grid',
@@ -9,19 +11,20 @@ import { CountriesService } from '../countries.service';
 export class CardGridComponent {
 
 country: any = {};
-lang: any;
-currency: any;
-capital: any;
-population: any;
+lang!: object;
+currency!: any;
+capital!: object;
+population!: string;
+commonName!: string;
 countrySelected = false;
+mapsAPIKey = "AIzaSyA5tonRP5wUzpkV5-uLfxVtgV0Fu3s-ZX8";
 
-  constructor(private countryService: CountriesService) {
+  constructor(private countryService: CountriesService, private sanitizer: DomSanitizer) {
     this.countryService.currentCountry.subscribe(country => this.setCards(country));
   }
 
   setCards(country: any) {
     this.country = country;
-    console.log(this.country);
     this.countrySelected = true;
     if (this.country && this.country.value && this.country.value.languages) {
       this.lang = Object.values(this.country.value.languages);
@@ -36,9 +39,11 @@ countrySelected = false;
     this.currency = Object.values(this.country.value.currencies);
     this.capital = this.country.value.capital;
     this.population = new Intl.NumberFormat('en-us').format(this.country.value.population);
-    console.log(this.lang);
-    console.log(this.currency);
-    console.log(this.capital);
-    console.log(this.population);
+    this.commonName = this.country.value.name.common;
   }
+
+  getSafeUrl() {
+    const url = 'https://www.google.com/maps/embed/v1/place?key=' + this.mapsAPIKey + '&q=' + this.commonName;
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+   }
 }
