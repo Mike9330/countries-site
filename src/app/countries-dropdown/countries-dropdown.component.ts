@@ -11,7 +11,7 @@ import { Output, EventEmitter } from '@angular/core';
  })
 export class CountriesDropdownComponent implements OnDestroy {
  private destroy$ = new Subject<void>();
-  listOfCountries: any[] = [];
+listOfCountries: any[] = [];
 value: any;
 
 @Output() emitCountries = new EventEmitter<any>();

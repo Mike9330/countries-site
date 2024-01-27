@@ -37,3 +37,16 @@ $countries-site-theme: mat.define-light-theme((
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.parallax {
+ /* The image used */
+ background-image: url("/assets/map.png");
+
+ /* Set a specific height */
+ min-height: 500px; 
+
+ /* Create the parallax scrolling effect */
+ background-attachment: fixed;
+ background-position: center;
+ background-repeat: no-repeat;
+ background-size: cover;
+}

@@ -11,7 +11,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class CardGridComponent {
 
 country: any = {};
-lang!: object;
+lang!: string[];
 currency!: any;
 capital!: object;
 population!: string;
@@ -40,10 +40,21 @@ mapsAPIKey = "AIzaSyA5tonRP5wUzpkV5-uLfxVtgV0Fu3s-ZX8";
     this.capital = this.country.value.capital;
     this.population = new Intl.NumberFormat('en-us').format(this.country.value.population);
     this.commonName = this.country.value.name.common;
+    console.log(this.country);
   }
 
-  getSafeUrl() {
+  getMapsUrl() {
     const url = 'https://www.google.com/maps/embed/v1/place?key=' + this.mapsAPIKey + '&q=' + this.commonName;
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+   }
+
+   getWikiLangUrl() {
+    const url = 'https://www.wikipedia.org/wiki/' + this.lang[0];
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+   }
+
+   getWikiCapUrl() {
+    const url = 'https://www.wikipedia.org/wiki/' + this.capital;
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
    }
 }
