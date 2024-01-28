@@ -19,6 +19,7 @@ value: any;
  constructor(private countryService: CountriesService) {}
 
  countries: any[] = [];
+ countrySelected = false;
 
  ngOnInit(){
   this.getCountries();
@@ -32,6 +33,7 @@ value: any;
  }
 
  countryChosen(country: any){
+  this.countrySelected = true;
   this.countryService.changeCountry(country);
  }
 

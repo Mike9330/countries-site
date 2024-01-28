@@ -44,6 +44,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
  /* Set a specific height */
  min-height: 500px; 
 
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ flex-direction: column;
+
  /* Create the parallax scrolling effect */
  background-attachment: fixed;
  background-position: center;
