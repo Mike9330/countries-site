@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { CountriesService } from '../countries.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -17,7 +18,7 @@ capital!: object;
 population!: string;
 commonName!: string;
 countrySelected = false;
-mapsAPIKey = "AIzaSyA5tonRP5wUzpkV5-uLfxVtgV0Fu3s-ZX8";
+mapsAPIKey = environment.mapsAPIKey;
 
   constructor(private countryService: CountriesService, private sanitizer: DomSanitizer) {
     this.countryService.currentCountry.subscribe(country => this.setCards(country));
